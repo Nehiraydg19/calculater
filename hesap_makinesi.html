@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hesap Makinesi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      text-align: center;
+      padding-top: 50px;
+    }
+    #hesapMakinesi {
+      background-color: #333;
+      width: 300px;
+      margin: auto;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    #sonuc {
+      width: 90%;
+      font-size: 24px;
+      padding: 10px;
+      margin-bottom: 10px;
+      text-align: right;
+      border-radius: 5px;
+    }
+    button {
+      width: 60px;
+      height: 40px;
+      margin: 5px;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="hesapMakinesi">
+    <input type="text" id="sonuc" disabled />
+    <br>
+    <button>7</button>
+    <button>8</button>
+    <button>9</button>
+    <button>/</button><br>
+    <button>4</button>
+    <button>5</button>
+    <button>6</button>
+    <button>*</button><br>
+    <button>1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>-</button><br>
+    <button>0</button>
+    <button>.</button>
+    <button>=</button>
+    <button>+</button><br>
+    <button id="sil">←</button> <!-- Silme tuşu -->
+    <button id="temizle">C</button> <!-- Temizleme tuşu -->
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll("button");
+    const display = document.getElementById("sonuc");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const value = button.textContent;
+
+        if (value === "=") {
+          try {
+            display.value = eval(display.value);
+          } catch {
+            display.value = "HATA";
+          }
+        } else if (value === "←") {
+          display.value = display.value.slice(0, -1); // Son karakteri sil
+        } else if (value === "C") {
+          display.value = ""; // Ekranı temizle
+        } else {
+          display.value += value;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
